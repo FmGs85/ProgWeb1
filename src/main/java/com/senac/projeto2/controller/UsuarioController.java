@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/usuario")
 @Tag(name="Usuario", description="api para gerenciamento dos usuários do sistema")
 public class UsuarioController {
+
     @GetMapping("/listar")
     @Operation(summary = "Listar usuarios do sistema")
     public String listar(){
         return "Listando com sucesso";
     }
+
     @GetMapping("/listarPoridUsuario/{idUsuario}")
     @Operation (summary = "Listar usuarios do sistema pelo id do usuário")
     public String listarPorIdUsuario(@PathVariable("idUsuario") Integer idUsuario){
