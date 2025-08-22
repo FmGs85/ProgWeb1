@@ -9,12 +9,32 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="categoria_id")
     private int id;
-
-    @Column(name="categoria_nome", nullable = false, length = 50)
+    @Column(name="categoria_nome")
     private String nome;
+    @Column(name="categoria_status")
+    private int status;
 
-    @Column(name="categoria_descricao", length = 200)
-    private String descricao;
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

@@ -5,7 +5,10 @@ import com.senac.projeto2.service.ParticipanteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -13,7 +16,6 @@ import java.util.List;
 @RequestMapping("api/participante")
 @Tag(name="Participante", description="API para gerenciamento dos participantes do sistema")
 public class ParticipanteController {
-
     private final ParticipanteService participanteService;
 
     public ParticipanteController(ParticipanteService participanteService) {
@@ -21,40 +23,20 @@ public class ParticipanteController {
     }
 
     @GetMapping("/listar")
-    @Operation(summary = "Listar todos os participantes do sistema")
+    @Operation(summary = "Listar usuarios do sistema")
     public ResponseEntity<List<Participante>> listar(){
         return ResponseEntity.ok(participanteService.listarParticipantes());
     }
 
-    @GetMapping("/listarPorId/{idParticipante}")
-    @Operation(summary = "Listar participante pelo id")
-    public ResponseEntity<Participante> listarPorId(@PathVariable("idParticipante") Integer idParticipante){
+    @GetMapping("/listarPorIdParticipante/{idParticipante}")
+    @Operation(summary = "Listar usuarios do sistema pelo id do usuário")
+    public ResponseEntity<Participante> listarPorIdUsuario(@PathVariable("idParticipante") Integer idParticipante){
         Participante participante = participanteService.listarParticipantePorId(idParticipante);
         if (participante == null) {
             return ResponseEntity.noContent().build();
-        } else {
+        }else{
             return ResponseEntity.ok(participante);
         }
     }
 
-    @PostMapping("/criar")
-    @Operation(summary = "Criar novo participante")
-    public String criar(@RequestBody Participante participante){
-        participanteService.criarParticipante(participante);
-        return "Participante criado com sucesso!";
-    }
-
-    @PutMapping("/atualizar")
-    @Operation(summary = "Atualizar participante")
-    public String atualizar(@RequestBody Participante participante){
-        participanteService.atualizarParticipante(participante);
-        return "Participante atualizado com sucesso!";
-    }
-
-    @DeleteMapping("/apagar/{idParticipante}")
-    @Operation(summary = "Apagar participante")
-    public String apagar(@PathVariable("idParticipante") Integer idParticipante){
-        participanteService.apagarParticipante(idParticipante);
-        return "Participante apagado com sucesso!";
-    }
 }
